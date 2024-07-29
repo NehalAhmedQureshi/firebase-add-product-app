@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/login.css">
     <title>Login Form</title>
 </head>
+
 <body>
-    <h1 id="login">Login</h1>
-    <form id="loginForm">
-        <input type="email" id="email" placeholder="example@gmail.com" ><br>
-        <input type="password" id="password" placeholder="suggest strong password">
-        <input type="submit" value="Submit"><br>
-        <a href="./signup.html">Don't have an account?</a>
-    </form>
+    <div class="main">
+        <h1 id="login">Login</h1>
+        <form id="loginForm">
+            <p style="color: red;" id="error"></p>
+            <input type="email" id="email" placeholder="example@gmail.com" required>
+            <input type="password" id="password" placeholder="Suggest Strong Password" minlength="7" maxlength="15"
+                required>
+            <div class="showPassword">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">Show Password</label>
+            </div>
+
+            <input type="submit" value="Submit">
+            <a href="./signup.html">Don't have an account?</a>
+        </form>
+    </div>
 
     <script type="module" src="../scripts/login.js"></script>
 </body>
+
 </html>

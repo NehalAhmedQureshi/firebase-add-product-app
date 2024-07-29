@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/signup.css">
     <title>SignUp</title>
 </head>
 <body>
-    <h1 id="signUp">SignUp</h1>
+    <div class="main">
+        <h1 id="signUp">SignUp</h1>
     <form class="signupForm">
-        <input type="email" id="email" placeholder="example@gmail.com"><br>
+        <p style="color: red;" id="error"></p>
+        <input type="email" id="email" placeholder="example@gmail.com">
         <input type="password" id="password" placeholder="suggest strong password">
-        <input type="submit" value="Submit"><br>
+        <div class="showPassword">
+            <input type="checkbox" name="" id="showPassword">
+            <label for="showPassword">Show Password</label>
+        </div>
+        <input type="submit" value="Submit">
         <a href="./login.html">Already have an account?</a>
     </form>
+    </div>
 
     <script type="module" src="../scripts/signup.js"></script>
 </body>
