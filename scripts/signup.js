@@ -24,10 +24,16 @@ signupForm.addEventListener('submit', async (event) => {
 
         const result = await createUserWithEmailAndPassword(auth, email, password)
         console.log("🚀 ~ signupForm.addEventListener ~ result:", result)
-        alert('Congratulation! You are register')
+        alert('Successfully SignUp!')
         window.location = "./login.html"
      } catch (error) {
         alert('error', error.message);
         errorMsg.innerHTML = "Invalid User Email or Password"
+        swal({
+            title: "Error!",
+            text: "Invalid UserEmail or UserPassword!",
+            type: "error",
+            confirmButtonText: "Ok"
+          });
     }
 })
