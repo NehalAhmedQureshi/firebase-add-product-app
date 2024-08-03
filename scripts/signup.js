@@ -4,7 +4,7 @@ const showPassword = document.querySelector("#showPassword")
 const password = document.querySelector("#password")
 const errorMsg = document.querySelector("#error")
 
-showPassword.addEventListener("click" , (e) => {
+showPassword.addEventListener("click" , (event) => {
     console.log(event.target.checked);
     if (event.target.checked) {
         password.type = "text"
@@ -28,7 +28,7 @@ signupForm.addEventListener('submit', async (event) => {
         window.location = "./login.html"
      } catch (error) {
         alert('error', error.message);
-        errorMsg.innerHTML = "Invalid User Email or Password"
+        errorMsg.innerHTML = "Email Already Exists!"
         swal({
             title: "Error!",
             text: "Invalid UserEmail or UserPassword!",

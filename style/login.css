@@ -5,30 +5,29 @@
 }
 body {
     width: 100%;
-    height: 80vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(../assessts/login.jpg) no-repeat;
+    background: rgb(226, 218, 214);
     background-position: center;
     background-size: cover;
 }
 .main {
     width: 30%;
-    height: 65vh;
+    height: 450px;
     display: flex;
+    background:rgba(100, 130, 173,0.6);
+    color: rgb(226, 218, 214);
     justify-content: center;
     align-items: center;
     flex-direction: column;
     /* border: 2px solid black; */
     gap: 40px;
     border-radius: 15px;
-    box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
-    backdrop-filter: blur(14px);
-    background-color: rgba(255, 255, 255, 0.2)
 }
 .main h1 {
-    font-size: 65px;
+    font-size: 60px;
     width: 100%;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -40,20 +39,44 @@ body {
 }
 a {
     font-weight: 800;
+    color: rgb(226, 218, 214);
+    font-size: 17px;
 }
 .main form {
     /* border: 3px solid gainsboro; */
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .main form input,
-.main form .password input {
+.main form .password input , button {
     height: 40px;
+    width: 100%;
     border-radius: 25px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    border:2px solid rgb(245, 237, 237);
+    background: rgb(226, 218, 214);
+    color: rgb(127, 161, 195);
     padding-left: 20px;
     font-size: 18px;
     font-weight: 600;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+button {
+    width: 40%;
+    padding-left: 0%;
+    font-size: 20px;
+    color: rgb(100, 130, 173);
+    background-color:rgb(226, 218, 214) ;
+}
+button:hover{
+    background-color: rgb(100, 130, 173);
+    color:rgb(226, 218, 214) ;
+}
+.main form input,
+.main form .password input:active {
+    outline: none;
 }
 form input::placeholder {
     font-size: 16px;
@@ -71,4 +94,30 @@ form input::placeholder {
     display: flex;
     gap: 5px;
     align-items: center;
+}
+/* //////////////////////////// */
+@media screen and (max-width:1030px) {
+    .main {
+        width: 40%;
+    }
+}
+@media screen and (max-width:790px) {
+    .main {
+        width: 50%;
+    }
+}
+@media screen and (max-width:570px) {
+    .main {
+        width: 60%;
+    }
+}
+@media screen and (max-width:470px) {
+    .main {
+        width: 70%;
+    }
+}
+@media screen and (max-width:410px) {
+    .main {
+        width: 80%;
+    }
 }

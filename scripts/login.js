@@ -6,7 +6,7 @@ const errorMsg = document.querySelector("#error")
 const showPassword = document.querySelector("#showPassword") 
 const password = document.querySelector("#password")
 
-showPassword.addEventListener("click" , (e) => {
+showPassword.addEventListener("click" , (event) => {
     console.log(event.target.checked);
     if (event.target.checked) {
         password.type = "text"

@@ -20,28 +20,31 @@
         </div>
     </div>
     <div class="home">
-        <div class="section1">
-            <div class="left">
-                <div class="heading">My Div</div>
-                <div class="content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis accusamus sunt veritatis. Unde neque provident omnis repellendus, vel magni. Harum aliquid debitis ratione voluptatibus inventore reprehenderit, cupiditate officia explicabo quisquam!
-                </div>
-                <div class="footer">
-                    @copyRight NehalAhmedQureshi
-                </div>
-            </div>
-            <div class="right">
-                <div class="heading">My Div</div>
-                <div class="content">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis accusamus sunt veritatis. Unde neque provident omnis repellendus, vel magni. Harum aliquid debitis ratione voluptatibus inventore reprehenderit, cupiditate officia explicabo quisquam!
-                </div>
-                <div class="footer">
-                    @copyRight NehalAhmedQureshi
-                </div>
-            </div>
+        <div class="addItems">
+            <form id="addProductForm">
+                <h2>Add Products</h2>
+
+                <input type="text" maxlength="35" minlength="2" class="product-name" placeholder="Product Name">
+                <input type="text" maxlength="35" minlength="2" class="product-type" placeholder="Product Type">
+                <!-- <input type="text" maxlength="15" minlength="2" class="product-description"
+                    placeholder="Product Description"> -->
+                <textarea name="" id="" class="product-description"
+                    placeholder="Product description here ........"></textarea>
+                <input type="number" maxlength="15" minlength="2" class="product-price" placeholder="Product Price">
+                <button type="submit" class="addItem">Add</button>
+            </form>
         </div>
-    </div>
-    <script type="module" src="../scripts/dashboard.js"></script>
+        <!-- <div class="productPrinter">
+            <div class="product">
+                <div class="name">I-Phone</div>
+                <div class="type">Mobile</div>
+                <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia unde numquam assumenda.
+                </div>
+                <div class="price">1200</div>
+            </div>
+        </div> -->
+        </div>
+        <script type="module" src="../scripts/dashboard.js"></script>
 </body>
 
 </html>
