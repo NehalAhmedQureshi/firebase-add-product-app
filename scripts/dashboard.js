@@ -1,12 +1,16 @@
 
 //  import firebase function form ./firebase.js
-import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc,serverTimestamp,getDocs, } from "./firebase.js";
+import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc, serverTimestamp, getDocs, } from "./firebase.js";
 
 // get elements from html file
 const emailDiv = document.querySelector(".email")
 let btn = document.querySelector('#signoutBtn')
 const addProductForm = document.querySelector("#addProductForm")
 const wrap = document.querySelector(".wrap")
+const showButton = document.querySelector("#show")
+const addItemForm = document.querySelector(".addItems")
+const hamburger = document.querySelector(".hamburger")
+const right = document.querySelector(".right")
 
 // firebase auth setup
 const auth = getAuth();
@@ -70,16 +74,16 @@ addProductForm.addEventListener("submit", async (event) => {
         productType: productType.value,
         productDescription: productDescription.value,
         productPrice: Number(productPrice.value),
-        createdAt : serverTimestamp()
+        createdAt: serverTimestamp()
     }
 
     // add try catch function
     try {
-        const result = await addDoc(myCollectionRef , product);
-        console.log("result => " , result );
+        const result = await addDoc(myCollectionRef, product);
+        console.log("result => ", result);
 
     } catch (error) {
-        console.log("error on document adding => " , error);
+        console.log("error on document adding => ", error);
 
     }
 })
@@ -92,3 +96,27 @@ querySnapshot.forEach((doc) => {
     console.log("🚀 ~ querySnapshot.forEach ~ product:", product)
 
 });
+
+
+showButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    if (addItemForm.style.transform == "translateY(0px)") {
+        addItemForm.style.transform = "TranslateY(950px)"
+    } else {
+        addItemForm.style.transform = "TranslateY(0px)";
+    }
+    console.log("hello");
+})
+
+hamburger.addEventListener("click", (event) => {
+    event.preventDefault();
+    console.log("active");
+
+    if (right.style.transform == "translateX(0px)") {
+        right.style.transform = "TranslateX(610px)"
+    } else {
+        right.style.transform = "TranslateX(0px)"
+    }
+    console.log(hamburger);
+
+})
