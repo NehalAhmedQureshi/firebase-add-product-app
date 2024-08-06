@@ -93,3 +93,29 @@ form input::placeholder {
     gap: 5px;
     align-items: center;
 }
+/* //////////////////////////// */
+@media screen and (max-width:1030px) {
+    .main {
+        width: 40%;
+    }
+}
+@media screen and (max-width:790px) {
+    .main {
+        width: 50%;
+    }
+}
+@media screen and (max-width:570px) {
+    .main {
+        width: 60%;
+    }
+}
+@media screen and (max-width:470px) {
+    .main {
+        width: 70%;
+    }
+}
+@media screen and (max-width:410px) {
+    .main {
+        width: 80%;
+    }
+}
