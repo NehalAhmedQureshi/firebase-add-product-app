@@ -1,6 +1,6 @@
 
 //  import firebase function form ./firebase.js
-import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc, serverTimestamp, getDocs,storage, ref, uploadBytes, getDownloadURL  } from "./firebase.js";
+import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc, serverTimestamp, getDocs, ref, uploadBytes, getDownloadURL  } from "./firebase.js";
 
 // get elements from html file
 const emailDiv = document.querySelector(".email")
