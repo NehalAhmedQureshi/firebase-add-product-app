@@ -92,7 +92,7 @@ body {
     font-size: 18px;
     box-shadow: 4px 4px 8px rgb(100, 135, 179);
     position: absolute;
-    bottom: 15px;
+    bottom: 25px;
     right: 15px;
     z-index: 30;
     cursor: pointer;
@@ -380,12 +380,12 @@ body {
     }
 
     #show {
-        height: 50px;
-        padding-top: 6px;
-        padding-bottom: 4px;
-        padding-right: 10px;
-        padding-left: 10px;
-        font-size: 17px;
+        height: 40px;
+        padding-top: 4px;
+        padding-bottom: 3px;
+        padding-right: 7px;
+        padding-left: 7px;
+        font-size: 15px;
     }
 
     .navbar .right .email {
@@ -411,12 +411,12 @@ body {
     }
 
     #show {
-        height: 50px;
-        padding-top: 6px;
-        padding-bottom: 4px;
-        padding-right: 10px;
-        padding-left: 10px;
-        font-size: 17px;
+        height: 35px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 6px;
+        padding-left: 6px;
+        font-size: 13px;
     }
 
     .navbar .right .email {
@@ -433,27 +433,7 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
-
-    .hamburger {
-        display: block;
-    }
-    .navbar .right {
-        position: absolute;
-        right: 0px;
-        top: 60px;
-        background-color: rgb(127, 161, 195);
-        flex-direction: column;
-        padding: 10px;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        transform: translateX(610px);
-        transition: all 600ms ease-in-out;
-        z-index: 20;
-        /* display: none; */
-    }
-
 }
-
 @media screen and (max-width:570px) {
     .addItems #addProductForm {
         width: 55%;
@@ -461,16 +441,16 @@ body {
     }
 
     #show {
-        height: 50px;
-        padding-top: 6px;
-        padding-bottom: 4px;
-        padding-right: 10px;
-        padding-left: 10px;
-        font-size: 17px;
+        height: 35px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 6px;
+        padding-left: 6px;
+        font-size: 13px;
     }
 
     .navbar .right .email {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .navbar .right button {
@@ -483,24 +463,36 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
-
-    .hamburger {
-        display: block;
+    .navbar {
+        padding: 30px;
+        padding-left: 5px;
+        padding-right: 5px;
+        z-index: 40;
     }
 
+    .navbar h2 {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width:465px) {
+    .navbar h2 {
+        font-size: 20px;
+    }
+    .navbar .right .email {
+        font-size: 12px;
+    }
+    .navbar .right button {
+        padding: 6px;
+        font-size: 12px;
+        border-radius: 25px;
+        background: rgb(226, 218, 214);
+        color: rgb(100, 130, 173);
+        font-family: cursive;
+        font-weight: 600;
+        box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
+    }
     .navbar .right {
-        position: absolute;
-        right: 0px;
-        top: 60px;
-        background-color: rgb(127, 161, 195);
-        flex-direction: column;
-        padding: 10px;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        transform: translateX(610px);
-        transition: all 600ms ease-in-out;
-        z-index: 20;
-
+        gap: 5px;
     }
 }
 
@@ -511,16 +503,12 @@ body {
     }
 
     #show {
-        height: 50px;
-        padding-top: 6px;
-        padding-bottom: 4px;
-        padding-right: 10px;
-        padding-left: 10px;
-        font-size: 17px;
-    }
-
-    .navbar .right .email {
-        font-size: 16px;
+        height: 35px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 6px;
+        padding-left: 6px;
+        font-size: 13px;
     }
 
     .navbar .right button {
@@ -533,25 +521,39 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
-
-    .hamburger {
-        display: block;
+    .navbar h2 {
+        font-size: 20px;
     }
-
+    .navbar .right .email {
+        font-size: 12px;
+    }
+    .navbar .right button {
+        padding: 6px;
+        font-size: 12px;
+        border-radius: 25px;
+        background: rgb(226, 218, 214);
+        color: rgb(100, 130, 173);
+        font-family: cursive;
+        font-weight: 600;
+        box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
+    }
     .navbar .right {
-        position: absolute;
-        right: 0px;
-        top: 60px;
-        background-color: rgb(127, 161, 195);
-        flex-direction: column;
-        padding: 10px;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        transform: translateX(610px);
-        /* z-index: -1; */
-        transition: all 600ms ease-in-out;
-        z-index: 20;
-
+        gap: 5px;
+    }
+}
+@media screen and (max-width:410px){
+    .navbar {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+    .navbar .right .email {
+        font-size: 8;
+    }
+    .navbar h2 {
+        font-size: 18px;
+    }
+    .navbar .right {
+        flex-wrap: wrap;
     }
 }
 
@@ -562,16 +564,12 @@ body {
     }
 
     #show {
-        height: 50px;
-        padding-top: 6px;
-        padding-bottom: 4px;
-        padding-right: 10px;
-        padding-left: 10px;
-        font-size: 17px;
-    }
-
-    .navbar .right .email {
-        font-size: 16px;
+        height: 35px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 6px;
+        padding-left: 6px;
+        font-size: 13px;
     }
 
     .navbar .right button {
@@ -585,32 +583,33 @@ body {
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
 
-    .hamburger {
-        display: block;
-    }
-
-    .navbar .right {
-        position: absolute;
-        right: 0px;
-        top: 60px;
-        background-color: rgb(127, 161, 195);
-        flex-direction: column;
-        padding: 10px;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        transform: translateX(610px);
-        transition: all 600ms ease-in-out;
-        z-index: 20;
-    }
-
     .navbar {
         padding: 30px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 4%;
+        padding-right: 4%;
         z-index: 40;
     }
 
     .navbar h2 {
-        font-size: 22px;
+        font-size: 18px;
+        width: 60%;
     }
+    .navbar .right .email {
+        font-size: 12px;
+    }
+    .navbar .right button {
+        padding: 6px;
+        font-size: 12px;
+        border-radius: 25px;
+        background: rgb(226, 218, 214);
+        color: rgb(100, 130, 173);
+        font-family: cursive;
+        font-weight: 600;
+        box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
+    }
+    .navbar .right {
+        gap: 5px;
+        justify-content: right;
+    }
+
 }
