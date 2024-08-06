@@ -25,7 +25,7 @@ signupForm.addEventListener('submit', async (event) => {
         const result = await createUserWithEmailAndPassword(auth, email, password)
         console.log("🚀 ~ signupForm.addEventListener ~ result:", result)
         alert('Successfully SignUp!')
-        window.location = "./login.html"
+        window.location = "./dashboard.html"
      } catch (error) {
         alert('error', error.message);
         errorMsg.innerHTML = "Email Already Exists!"

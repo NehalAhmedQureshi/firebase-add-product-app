@@ -1,6 +1,6 @@
 
 //  import firebase function form ./firebase.js
-import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc, serverTimestamp, getDocs, } from "./firebase.js";
+import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc, serverTimestamp, getDocs,storage, ref, uploadBytes, getDownloadURL  } from "./firebase.js";
 
 // get elements from html file
 const emailDiv = document.querySelector(".email")
@@ -12,8 +12,35 @@ const addItemForm = document.querySelector(".addItems")
 const hamburger = document.querySelector(".hamburger")
 const right = document.querySelector(".right")
 
+
+// show products adding form
+showButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    if (addItemForm.style.transform == "translateY(0px)") {
+        addItemForm.style.transform = "TranslateY(950px)"
+    } else {
+        addItemForm.style.transform = "TranslateY(0px)";
+    }
+    console.log("hello");
+})
+
+// set hamburger menu bar 
+hamburger.addEventListener("click", (event) => {
+    event.preventDefault();
+    console.log("active");
+
+    if (right.style.transform == "translateX(0px)") {
+        right.style.transform = "TranslateX(610px)"
+        alert("i am here")
+    } else {
+        right.style.transform = "TranslateX(0px)"
+    }
+    console.log(hamburger);
+
+})
 // firebase auth setup
 const auth = getAuth();
+
 
 // check is user is log in or not
 onAuthStateChanged(auth, (user) => {
@@ -95,45 +122,50 @@ const querySnapshot = await getDocs(myCollectionRef)
 
 querySnapshot.forEach((doc) => {
     const product = doc.data();
-    const name = product.productName;
+    // wrap = ""
+    const prName = product.productName;
     const type = product.productType;
     const description = product.productDescription;
     const createTime = product.createdAt;
     const price = product.productPrice;
     const img = product.productImg;
-    
-    console.log("🚀 ~ querySnapshot.forEach ~ product:", product.productName)
-    console.log("🚀 ~ querySnapshot.forEach ~ img:", img)
-    console.log("🚀 ~ querySnapshot.forEach ~ price:", price)
-    console.log("🚀 ~ querySnapshot.forEach ~ product:", product)
-    console.log("🚀 ~ querySnapshot.forEach ~ createTime:", createTime)
-    console.log("🚀 ~ querySnapshot.forEach ~ description:", description)
-    console.log("🚀 ~ querySnapshot.forEach ~ name:", name)
-    console.log("🚀 ~ querySnapshot.forEach ~ type:", type)
-    
+ 
+    // make card
+    const card = document.createElement("div")
+    card.setAttribute("class" , "card")
+
+    const duration = document.createElement("div")
+    duration.setAttribute("class" , "duration")
+
+    const imgDiv = document.createElement("div")
+    imgDiv.setAttribute("class" , "img")
+    const imgDivInner = document.createElement("img")
+    imgDivInner.setAttribute("alt" , "no image")
+    imgDiv.appendChild(imgDivInner)
+
+    const nameDiv = document.createElement("div")
+    nameDiv.setAttribute("class" , "name")
+
+    const descDiv = document.createElement("div")
+    descDiv.setAttribute("class" , "description")
+
+    const priceDiv = document.createElement("div")
+    priceDiv.setAttribute("class" , "price")
+
+    const BuyDiv = document.createElement("div")
+    BuyDiv.setAttribute("class" , "buyNow")
+
+    wrap.appendChild(card)
+    card.appendChild(duration)
+    card.appendChild(imgDiv)
+    card.appendChild(nameDiv)
+    card.appendChild(descDiv)
+    card.appendChild(priceDiv)
+    card.appendChild(BuyDiv)
+
+    nameDiv.innerHTML=prName
+    descDiv.innerHTML= description
+    priceDiv.innerHTML=price
+    BuyDiv.innerHTML="Buy Now"
 });
 
-// show products adding form
-showButton.addEventListener("click", (e) => {
-    e.preventDefault()
-    if (addItemForm.style.transform == "translateY(0px)") {
-        addItemForm.style.transform = "TranslateY(950px)"
-    } else {
-        addItemForm.style.transform = "TranslateY(0px)";
-    }
-    console.log("hello");
-})
-
-// set hamburger menu bar 
-hamburger.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("active");
-
-    if (right.style.transform == "translateX(0px)") {
-        right.style.transform = "TranslateX(610px)"
-    } else {
-        right.style.transform = "TranslateX(0px)"
-    }
-    console.log(hamburger);
-
-})

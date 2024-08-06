@@ -15,6 +15,12 @@ body {
     overflow-x: hidden;
     overflow: hidden;
 }
+.grid {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    border: 4px solid black;
+}
 
 .navbar {
     width: 100%;
@@ -230,7 +236,7 @@ body {
     width: 7%;
     /* height: 365px; */
     /* padding: 10px; */
-    /* height: 70vh; */
+    height: 40vh;
     /* border: 2px solid grey; */
     display: flex;
     flex-direction: column;
@@ -248,8 +254,8 @@ body {
 }
 
 .card:hover {
-    transform:rotateZ(360deg) ;
     width: 25%;
+    height: 50vh;
     .description {
         font-size: 16px;
     }
@@ -293,7 +299,7 @@ body {
 
 .card .img {
     /* border: 2px solid pink; */
-    height: 10vh;
+    height: 20vh;
     width: 100%;
 }
 
@@ -311,6 +317,7 @@ body {
     font-size: 10px;
     padding-left: 5px;
     padding-right: 5px;
+    height: 10vh;
 }
 
 .card .price {
@@ -323,7 +330,7 @@ body {
     color: rgb(141, 170, 210);
     background: rgb(116, 159, 201);
     width: 100%;
-    height: 40px;
+    height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;

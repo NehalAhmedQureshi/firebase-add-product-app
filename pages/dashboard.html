@@ -9,43 +9,45 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <h2>Personal Dashboard</h2>
-        <div class="right">
-            <div class="email">
-                <img src="https://cdn.pixabay.com/animation/2024/04/02/07/57/07-57-40-974_512.gif" width="35px"
-                    alt="Loading...">
-            </div>
-            <button id="signoutBtn">Signout</button>
-        </div>
-        <div class="hamburger"></div>
-    </div>
-    <div class="home">
-        <button id="show" >Add Items</button>
-        <div class="addItems">
-            <form id="addProductForm">
-                <h2>Add Products</h2>
-
-                <input type="text" maxlength="35" minlength="2" class="product-name" placeholder="Product Name">
-                <input type="text" maxlength="35" minlength="2" class="product-type" placeholder="Product Type">
-                <input type="file" id="img">
-                <textarea name="" id="" class="product-description"
-                    placeholder="Product description here ........"></textarea>
-                <input type="number" maxlength="15" minlength="2" class="product-price" placeholder="Product Price">
-                <button type="submit" class="addItem">Add</button>
-            </form>
-        </div>
-        <div class="productPrinter">
-            <div class="wrap">
-                <div class="card">
-                    <div class="duration">2 days ago</div>
-                    <div class="img"><img src="../assessts/flag.jpg" width="250px" alt=""></div>
-                    <div class="name">Lorem</div>
-                    <div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, illo.</div>
-                    <div class="price">RS-600</div>
-                    <div class="buyNow">Buy Now</div>
+    <div class="grid">
+        <div class="navbar">
+            <h2>Personal Dashboard</h2>
+            <div class="right">
+                <div class="email">
+                    <img src="https://cdn.pixabay.com/animation/2024/04/02/07/57/07-57-40-974_512.gif" width="35px"
+                        alt="Loading...">
                 </div>
-                
+                <button id="signoutBtn">Signout</button>
+            </div>
+            <div class="hamburger"></div>
+        </div>
+        <div class="home">
+            <button id="show" >Add Items</button>
+            <div class="addItems">
+                <form id="addProductForm">
+                    <h2>Add Products</h2>
+    
+                    <input type="text" maxlength="35" minlength="2" class="product-name" placeholder="Product Name">
+                    <input type="text" maxlength="35" minlength="2" class="product-type" placeholder="Product Type">
+                    <input type="file" id="img" accept="image/*">
+                    <textarea name="" id="" class="product-description"
+                        placeholder="Product description here ........"></textarea>
+                    <input type="number" maxlength="15" minlength="2" class="product-price" placeholder="Product Price">
+                    <button type="submit" class="addItem">Add</button>
+                </form>
+            </div>
+            <div class="productPrinter">
+                <div class="wrap">
+                    <!-- <div class="card">
+                        <div class="duration">2 days ago</div>
+                        <div class="img"><img src="../assessts/flag.jpg" width="250px" alt=""></div>
+                        <div class="name">Lorem</div>
+                        <div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, illo.</div>
+                        <div class="price">RS-600</div>
+                        <div class="buyNow">Buy Now</div>
+                    </div> -->
+                    
+                </div>
             </div>
         </div>
     </div>
