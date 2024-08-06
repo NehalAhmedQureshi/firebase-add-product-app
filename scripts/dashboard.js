@@ -60,8 +60,9 @@ addProductForm.addEventListener("submit", async (event) => {
     // getting input by event target
     const productName = event.target.children[1]
     const productType = event.target.children[2]
-    const productDescription = event.target.children[3]
-    const productPrice = event.target.children[4]
+    const productImg = event.target.children[3]
+    const productDescription = event.target.children[4]
+    const productPrice = event.target.children[5]
 
     // console all input get by html classess
     // console.log("🚀 ~ addProductForm.addEventListener ~ productName:", productName)
@@ -74,7 +75,8 @@ addProductForm.addEventListener("submit", async (event) => {
         productType: productType.value,
         productDescription: productDescription.value,
         productPrice: Number(productPrice.value),
-        createdAt: serverTimestamp()
+        createdAt: serverTimestamp(),
+        productImg: null,
     }
 
     // add try catch function
@@ -93,11 +95,25 @@ const querySnapshot = await getDocs(myCollectionRef)
 
 querySnapshot.forEach((doc) => {
     const product = doc.data();
+    const name = product.productName;
+    const type = product.productType;
+    const description = product.productDescription;
+    const createTime = product.createdAt;
+    const price = product.productPrice;
+    const img = product.productImg;
+    
+    console.log("🚀 ~ querySnapshot.forEach ~ product:", product.productName)
+    console.log("🚀 ~ querySnapshot.forEach ~ img:", img)
+    console.log("🚀 ~ querySnapshot.forEach ~ price:", price)
     console.log("🚀 ~ querySnapshot.forEach ~ product:", product)
-
+    console.log("🚀 ~ querySnapshot.forEach ~ createTime:", createTime)
+    console.log("🚀 ~ querySnapshot.forEach ~ description:", description)
+    console.log("🚀 ~ querySnapshot.forEach ~ name:", name)
+    console.log("🚀 ~ querySnapshot.forEach ~ type:", type)
+    
 });
 
-
+// show products adding form
 showButton.addEventListener("click", (e) => {
     e.preventDefault()
     if (addItemForm.style.transform == "translateY(0px)") {
@@ -108,6 +124,7 @@ showButton.addEventListener("click", (e) => {
     console.log("hello");
 })
 
+// set hamburger menu bar 
 hamburger.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("active");

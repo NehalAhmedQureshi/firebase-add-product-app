@@ -26,7 +26,7 @@ body {
     justify-content: space-between;
     background-color: rgb(100, 130, 173);
     color: rgb(226, 218, 214);
-    z-index: 1;
+    z-index: 40;
 }
 
 .navbar .right .email {
@@ -243,7 +243,7 @@ body {
     box-shadow: 2px 4px 20px rgba(97, 96, 96, 0.5);
     color: rgb(99, 126, 153);
     position: relative;
-    z-index: 2;
+    z-index: 5;
     transition: transform 1s ,width 1s;
 }
 
@@ -430,7 +430,6 @@ body {
     .hamburger {
         display: block;
     }
-
     .navbar .right {
         position: absolute;
         right: 0px;
@@ -443,7 +442,9 @@ body {
         transform: translateX(610px);
         transition: all 600ms ease-in-out;
         z-index: 20;
+        /* display: none; */
     }
+
 }
 
 @media screen and (max-width:570px) {
@@ -593,13 +594,13 @@ body {
         transform: translateX(610px);
         transition: all 600ms ease-in-out;
         z-index: 20;
-
     }
 
     .navbar {
         padding: 30px;
         padding-left: 10px;
         padding-right: 10px;
+        z-index: 40;
     }
 
     .navbar h2 {
