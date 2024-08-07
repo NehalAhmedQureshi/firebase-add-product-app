@@ -42,14 +42,17 @@ hamburger.addEventListener("click", (event) => {
 // firebase auth setup
 const auth = getAuth();
 
+
+
 // check is user is log in or not
 onAuthStateChanged(auth, (user) => {
+    console.log(user);
+    localStorage.setItem("userEmail", user.email)
     if (user) {
         console.log(user.uid);
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const userEmail = user.email;
-        localStorage.setItem("userEmail", userEmail)
         // console.log("🚀 ~ onAuthStateChanged ~ uid:", userEmail)
         emailDiv.innerHTML = userEmail
         // ...
@@ -76,10 +79,14 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // getting user email
+
 const userId = localStorage.getItem("userEmail")
 console.log("🚀 ~ userId:", userId)
 
 // create document reference
+if (userId == null ) {
+    alert("hello")
+}
 const myCollectionRef = collection(db, `${userId}-products`)
 
 // add event listnere on product add form 
