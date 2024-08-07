@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
-  import { getFirestore ,collection, addDoc , serverTimestamp,getDocs,  } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+  import { getFirestore ,collection, addDoc , serverTimestamp,getDocs, onSnapshot, } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged ,signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
   import {
     getStorage,
@@ -35,6 +35,6 @@
   export {getAuth,auth ,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged, signOut,collection, addDoc,db,serverTimestamp,getDocs,getStorage,
     ref,
     uploadBytes,
-    getDownloadURL,}
+    getDownloadURL,onSnapshot,storage}
 
   

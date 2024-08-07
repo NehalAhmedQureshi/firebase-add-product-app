@@ -1,6 +1,6 @@
 
 //  import firebase function form ./firebase.js
-import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc, serverTimestamp, getDocs, ref, uploadBytes, getDownloadURL  } from "./firebase.js";
+import { getAuth, signOut, onAuthStateChanged, collection, db, addDoc, serverTimestamp, getDocs, ref, uploadBytes, getDownloadURL, onSnapshot, storage } from "./firebase.js";
 
 // get elements from html file
 const emailDiv = document.querySelector(".email")
@@ -11,6 +11,7 @@ const showButton = document.querySelector("#show")
 const addItemForm = document.querySelector(".addItems")
 const hamburger = document.querySelector(".hamburger")
 const right = document.querySelector(".right")
+const imgInput = document.querySelector("#img")
 
 
 // show products adding form
@@ -41,15 +42,15 @@ hamburger.addEventListener("click", (event) => {
 // firebase auth setup
 const auth = getAuth();
 
-
 // check is user is log in or not
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        console.log("🚀 ~ onAuthStateChanged ~ user:", user)
+        console.log(user.uid);
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const userEmail = user.email;
-        console.log("🚀 ~ onAuthStateChanged ~ uid:", userEmail)
+        localStorage.setItem("userEmail", userEmail)
+        // console.log("🚀 ~ onAuthStateChanged ~ uid:", userEmail)
         emailDiv.innerHTML = userEmail
         // ...
     } else {
@@ -57,6 +58,7 @@ onAuthStateChanged(auth, (user) => {
         // ...
         console.log('SignOut');
         window.location = "./login.html"
+        localStorage.removeItem("userEmail")
     }
 
     // sign out function on click button
@@ -65,15 +67,20 @@ onAuthStateChanged(auth, (user) => {
         try {
             await signOut(auth)
             console.log("SignOut Successfully!")
-            // window.location = "./login.html"
+            localStorage.removeItem("userEmail")
+            window.location = "./login.html"
         } catch (error) {
             console.log('error => ', error);
         }
     })
 });
 
+// getting user email
+const userId = localStorage.getItem("userEmail")
+console.log("🚀 ~ userId:", userId)
+
 // create document reference
-const myCollectionRef = collection(db, "products")
+const myCollectionRef = collection(db, `${userId}-products`)
 
 // add event listnere on product add form 
 addProductForm.addEventListener("submit", async (event) => {
@@ -81,8 +88,21 @@ addProductForm.addEventListener("submit", async (event) => {
     // stop page refreshing on adding event listnere
     event.preventDefault()
 
-    // console event's target
-    // console.log("event target => " , event.target.children);
+    console.log(event.target.children[6].disabled);
+    
+    event.target.children[6].disabled = true
+
+    console.log(event.target.children[6].disabled);
+
+
+    // send img to storage box
+    const myFile = imgInput.files[0];
+    // storage referance 
+    const storageRef = ref(storage, myFile.name);
+    // we are uploading the file here to the storage bucket
+    const imgSnapShot = await uploadBytes(storageRef, myFile);
+    // get the download url of the file
+    const imgUrl = await getDownloadURL(storageRef);
 
     // getting input by event target
     const productName = event.target.children[1]
@@ -90,27 +110,20 @@ addProductForm.addEventListener("submit", async (event) => {
     const productImg = event.target.children[3]
     const productDescription = event.target.children[4]
     const productPrice = event.target.children[5]
-
-    // console all input get by html classess
-    // console.log("🚀 ~ addProductForm.addEventListener ~ productName:", productName)
-    // console.log("🚀 ~ addProductForm.addEventListener ~ productType:", productType)
-    // console.log("🚀 ~ addProductForm.addEventListener ~ productDescription:", productDescription)
-    // console.log("🚀 ~ addProductForm.addEventListener ~ productPrice:", productPrice)
-
     const product = {
         productName: productName.value,
         productType: productType.value,
         productDescription: productDescription.value,
         productPrice: Number(productPrice.value),
         createdAt: serverTimestamp(),
-        productImg: null,
+        productImg: imgUrl,
     }
-
+    addProductForm.reset()
+    event.target.children[6].disabled = false
     // add try catch function
     try {
         const result = await addDoc(myCollectionRef, product);
         console.log("result => ", result);
-
     } catch (error) {
         console.log("error on document adding => ", error);
 
@@ -129,31 +142,40 @@ querySnapshot.forEach((doc) => {
     const createTime = product.createdAt;
     const price = product.productPrice;
     const img = product.productImg;
- 
+    console.log("🚀 ~ querySnapshot.forEach ~ img:", img)
+
+    // date converted to "1 day ago | 20 min ago" (optional)
+    const date1 = product.createdAt
+        ? dateFns.formatDistance(product.createdAt?.toDate(), new Date(), {
+            addSuffix: true, // true means ago add karna hy
+        })
+        : "";
+
     // make card
     const card = document.createElement("div")
-    card.setAttribute("class" , "card")
+    card.setAttribute("class", "card")
 
     const duration = document.createElement("div")
-    duration.setAttribute("class" , "duration")
+    duration.setAttribute("class", "duration")
 
     const imgDiv = document.createElement("div")
-    imgDiv.setAttribute("class" , "img")
+    imgDiv.setAttribute("class", "img")
     const imgDivInner = document.createElement("img")
-    imgDivInner.setAttribute("alt" , "no image")
+    imgDivInner.setAttribute("alt", "no image")
+    imgDivInner.setAttribute("src" , img)
     imgDiv.appendChild(imgDivInner)
 
     const nameDiv = document.createElement("div")
-    nameDiv.setAttribute("class" , "name")
+    nameDiv.setAttribute("class", "name")
 
     const descDiv = document.createElement("div")
-    descDiv.setAttribute("class" , "description")
+    descDiv.setAttribute("class", "description")
 
     const priceDiv = document.createElement("div")
-    priceDiv.setAttribute("class" , "price")
+    priceDiv.setAttribute("class", "price")
 
     const BuyDiv = document.createElement("div")
-    BuyDiv.setAttribute("class" , "buyNow")
+    BuyDiv.setAttribute("class", "buyNow")
 
     wrap.appendChild(card)
     card.appendChild(duration)
@@ -163,9 +185,69 @@ querySnapshot.forEach((doc) => {
     card.appendChild(priceDiv)
     card.appendChild(BuyDiv)
 
-    nameDiv.innerHTML=prName
-    descDiv.innerHTML= description
-    priceDiv.innerHTML=price
-    BuyDiv.innerHTML="Buy Now"
+    nameDiv.innerHTML = prName
+    descDiv.innerHTML = description
+    priceDiv.innerHTML = price
+    BuyDiv.innerHTML = "Buy Now"
+    duration.innerHTML = date1
+});
+
+// working 2
+
+onSnapshot(myCollectionRef, (doc) => {
+    wrap.innerHTML = "";
+
+    doc.docs.forEach((eachDoc, index) => {
+        console.log("🚀 ~ doc.docs.forEach ~ index:", index)
+        const product = eachDoc.data();
+
+        //   set date order 
+        const date1 = product.createdAt
+            ? dateFns.formatDistance(product.createdAt?.toDate(), new Date(), {
+                addSuffix: true, // true means ago add karna hy
+            })
+            : "";
+
+        // make card
+        const card = document.createElement("div")
+        card.setAttribute("class", "card")
+
+        const duration = document.createElement("div")
+        duration.setAttribute("class", "duration")
+
+        const imgDiv = document.createElement("div")
+        imgDiv.setAttribute("class", "img")
+        const imgDivInner = document.createElement("img")
+        imgDivInner.setAttribute("alt", "no image")
+        imgDivInner.setAttribute("src", product.productImg)
+        imgDiv.appendChild(imgDivInner)
+
+        const nameDiv = document.createElement("div")
+        nameDiv.setAttribute("class", "name")
+
+        const descDiv = document.createElement("div")
+        descDiv.setAttribute("class", "description")
+
+        const priceDiv = document.createElement("div")
+        priceDiv.setAttribute("class", "price")
+
+        const BuyDiv = document.createElement("div")
+        BuyDiv.setAttribute("class", "buyNow")
+
+        wrap.appendChild(card)
+        card.appendChild(duration)
+        card.appendChild(imgDiv)
+        card.appendChild(nameDiv)
+        card.appendChild(descDiv)
+        card.appendChild(priceDiv)
+        card.appendChild(BuyDiv)
+
+        nameDiv.innerHTML = product.productName
+        descDiv.innerHTML = product.productDescription
+        priceDiv.innerHTML = product.productPrice
+        BuyDiv.innerHTML = "Buy Now"
+        duration.innerHTML = date1
+
+    });
 });
 

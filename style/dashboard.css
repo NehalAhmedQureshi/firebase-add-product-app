@@ -15,6 +15,7 @@ body {
     overflow-x: hidden;
     overflow: hidden;
 }
+
 .grid {
     width: 100%;
     height: 100vh;
@@ -214,12 +215,12 @@ body {
     width: 100%;
     height: 100vh;
     z-index: 2;
-    margin-top: -550px;
+    margin-top: -510px;
 }
 
 .productPrinter .wrap {
     width: 100%;
-    height: 90vh ;
+    height: 70vh;
     /* height: 50vh; */
     /* border: 2px solid red; */
     display: flex;
@@ -227,9 +228,13 @@ body {
     align-items: center;
     gap: 10px;
     padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
     padding-bottom: 20px;
     z-index: 2;
     transition: all 200ms ease-in-out;
+    overflow: auto;
+
 }
 
 .card {
@@ -250,12 +255,13 @@ body {
     color: rgb(99, 126, 153);
     position: relative;
     z-index: 5;
-    transition: transform 1s ,width 1s;
+    transition: transform 1s, width 1s;
 }
 
 .card:hover {
-    width: 25%;
+    width: 20%;
     height: 50vh;
+
     .description {
         font-size: 16px;
     }
@@ -266,6 +272,7 @@ body {
 
     .price {
         font-size: 30px;
+        font-size: 600;
     }
 
     .duration {
@@ -276,9 +283,11 @@ body {
         padding-left: 10px;
         padding-right: 10px;
     }
+
     .buyNow {
         font-size: 30px;
     }
+
     .img {
         height: 25vh;
     }
@@ -287,11 +296,11 @@ body {
 .card .duration {
     position: absolute;
     top: 10px;
-    font-size: 10px;
+    font-size: 6px;
     /* left: 10px; */
     background: rgb(100, 130, 173);
     color: rgb(245, 237, 237);
-    padding: 2px; 
+    padding: 2px;
     padding-left: 4px;
     padding-right: 4px;
     border-radius: 25px;
@@ -334,7 +343,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
+    font-size: 10px;
     font-weight: 540;
     font-weight: 600;
     padding-bottom: 8px;
@@ -354,7 +363,23 @@ body {
         width: 30%;
         gap: 20px;
     }
-
+    .card:hover {
+        .name {
+            font-size: 23px;
+        }
+        .price {
+            font-size: 23px;
+        }
+        .buyNow{
+            font-size: 25px;
+        }
+    }
+    .card .duration{
+        font-size: 5px;
+    }
+    .productPrinter{
+        margin-top: -590px;
+    }
 }
 
 @media screen and (max-width:980px) {
@@ -370,6 +395,27 @@ body {
         padding-right: 10px;
         padding-left: 10px;
         font-size: 17px;
+    }
+    .card {
+        width: 6%;
+    }
+    .card:hover {
+        width: 30%;
+        .name{
+            font-size: 22px;
+        }
+        .description{
+            font-size: 13px;
+        }
+        .price {
+            font-size: 22px;
+        }
+    }
+    .card .duration{
+        font-size: 5px;
+    }
+    .productPrinter{
+        margin-top: -450px;
     }
 }
 
@@ -402,6 +448,30 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
+    .card {
+        width: 7%;
+        /* height: 45vh; */
+    }
+    .card:hover {
+        /* min-height: 45vh; */
+        max-height: 45vh;
+        width: 35%;
+        .name{
+            font-size: 21px;
+        }
+        .description{
+            font-size: 13px;
+        }
+        .price {
+            font-size: 21px;
+        }
+        .duration{
+            font-size: 13px;
+        }
+    }
+    .card .duration{
+        font-size: 4px;
+    }
 }
 
 @media screen and (max-width:615px) {
@@ -433,7 +503,15 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
+    .productPrinter .wrap{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .card .duration{
+        font-size: 3px;
+    }
 }
+
 @media screen and (max-width:570px) {
     .addItems #addProductForm {
         width: 55%;
@@ -463,6 +541,7 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
+
     .navbar {
         padding: 30px;
         padding-left: 5px;
@@ -473,14 +552,55 @@ body {
     .navbar h2 {
         font-size: 20px;
     }
+    .card {
+        width: 7%;
+    }
+    .card .name {
+        font-size: 9px;
+    }
+    .card .description {
+        font-size: 5px;
+    }
+    .card .price{
+        font-size: 9px;
+    }
+    .card .buyNow{
+        font-size: 6px;
+    }
+    .card:hover {
+        width: 45%;
+        .name {
+            font-size: 20px;
+        }
+        .description{
+            font-size: 12px;
+        }
+        .price {
+            font-size: 20px;
+        }
+        .buyNow {
+            font-size: 17px;
+        }
+        .duration{
+            font-size: 10px;
+        }
+    }
+    .productPrinter .wrap{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
 }
+
 @media screen and (max-width:465px) {
     .navbar h2 {
         font-size: 20px;
     }
+
     .navbar .right .email {
         font-size: 12px;
     }
+
     .navbar .right button {
         padding: 6px;
         font-size: 12px;
@@ -491,8 +611,12 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
+
     .navbar .right {
         gap: 5px;
+    }
+    .duration{
+        font-size: 3px;
     }
 }
 
@@ -521,12 +645,15 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
+
     .navbar h2 {
         font-size: 20px;
     }
+
     .navbar .right .email {
         font-size: 12px;
     }
+
     .navbar .right button {
         padding: 6px;
         font-size: 12px;
@@ -537,21 +664,37 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
+
     .navbar .right {
         gap: 5px;
     }
+    .card:hover{
+        .name {
+            font-size: 18px;
+        }
+        .duration{
+            font-size: 5px;
+        }
+    }
+    .card .duration{
+        font-size: 3px;
+    }
 }
-@media screen and (max-width:410px){
+
+@media screen and (max-width:410px) {
     .navbar {
         padding-left: 0%;
         padding-right: 0%;
     }
+
     .navbar .right .email {
         font-size: 8;
     }
+
     .navbar h2 {
         font-size: 18px;
     }
+
     .navbar .right {
         flex-wrap: wrap;
     }
@@ -594,9 +737,11 @@ body {
         font-size: 18px;
         width: 60%;
     }
+
     .navbar .right .email {
         font-size: 12px;
     }
+
     .navbar .right button {
         padding: 6px;
         font-size: 12px;
@@ -607,9 +752,24 @@ body {
         font-weight: 600;
         box-shadow: 1px 2px 5px rgba(6, 6, 6, 0.6);
     }
+
     .navbar .right {
         gap: 5px;
         justify-content: right;
+    }
+    .card:hover{
+        .name{
+            font-size: 15px;
+        }
+        .price{
+            font-size: 15px;
+        }
+        .description{
+            font-size: 10px;
+        }
+        .buyNow{
+            font-size: 15px;
+        }
     }
 
 }

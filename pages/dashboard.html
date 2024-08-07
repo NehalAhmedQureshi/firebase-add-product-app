@@ -27,30 +27,23 @@
                 <form id="addProductForm">
                     <h2>Add Products</h2>
     
-                    <input type="text" maxlength="35" minlength="2" class="product-name" placeholder="Product Name">
-                    <input type="text" maxlength="35" minlength="2" class="product-type" placeholder="Product Type">
-                    <input type="file" id="img" accept="image/*">
-                    <textarea name="" id="" class="product-description"
-                        placeholder="Product description here ........"></textarea>
-                    <input type="number" maxlength="15" minlength="2" class="product-price" placeholder="Product Price">
+                    <input style="text-transform: capitalize;" type="text" maxlength="15" minlength="2" class="product-name" placeholder="Product Name" required>
+                    <input style="text-transform: capitalize;" type="text" maxlength="35" minlength="2" class="product-type" placeholder="Product Type" required>
+                    <input type="file" id="img" accept="image/*" required>
+                    <textarea style="text-transform: capitalize;" name="" id="" class="product-description"
+                        minlength="10" maxlength="25" placeholder="Product description here ........" required></textarea>
+                    <input type="number" maxlength="15" minlength="2" class="product-price" placeholder="Product Price" required>
                     <button type="submit" class="addItem">Add</button>
                 </form>
             </div>
             <div class="productPrinter">
                 <div class="wrap">
-                    <!-- <div class="card">
-                        <div class="duration">2 days ago</div>
-                        <div class="img"><img src="../assessts/flag.jpg" width="250px" alt=""></div>
-                        <div class="name">Lorem</div>
-                        <div class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, illo.</div>
-                        <div class="price">RS-600</div>
-                        <div class="buyNow">Buy Now</div>
-                    </div> -->
-                    
+                    <h1>Add Products</h1>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@3.6.0/cdn.min.js"></script>
         <script type="module" src="../scripts/dashboard.js"></script>
 </body>
 
