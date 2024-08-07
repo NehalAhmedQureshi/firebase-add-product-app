@@ -13,8 +13,8 @@
         <h1 id="signUp">SignUp</h1>
         <form class="signupForm">
             <p style="color: red;" id="error"></p>
-            <input type="email" id="email" placeholder="example@gmail.com">
-            <input type="password" id="password" minlength="7" maxlength="15" placeholder="suggest strong password">
+            <input type="email" id="email" placeholder="example@gmail.com" required>
+            <input type="password" id="password" minlength="7" maxlength="15" placeholder="suggest strong password" required>
             <div class="showPassword">
                 <input type="checkbox" name="" id="showPassword">
                 <label for="showPassword">Show Password</label>
@@ -24,8 +24,8 @@
         </form>
     </div>
 
-    <script src="sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
     <script type="module" src="../scripts/signup.js"></script>
 </body>
 

@@ -22,6 +22,7 @@ form.addEventListener('submit', async (event) => {
         const email = document.querySelector("#email").value
         const password = document.querySelector("#password").value
 
+        localStorage.setItem("email" , email)
         const result = await signInWithEmailAndPassword(auth , email, password)
         console.log("🚀 ~ form.addEventListener ~ result:", result)
         alert("Successfully LogIn!")

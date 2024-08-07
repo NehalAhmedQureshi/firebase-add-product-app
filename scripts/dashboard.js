@@ -43,25 +43,23 @@ hamburger.addEventListener("click", (event) => {
 const auth = getAuth();
 
 
+console.log(auth);
 
 // check is user is log in or not
 onAuthStateChanged(auth, (user) => {
-    console.log(user);
-    localStorage.setItem("userEmail", user.email)
     if (user) {
-        console.log(user.uid);
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const userEmail = user.email;
         // console.log("🚀 ~ onAuthStateChanged ~ uid:", userEmail)
         emailDiv.innerHTML = userEmail
+        localStorage.setItem("email" , userEmail)
         // ...
     } else {
         // User is signed out
         // ...
         console.log('SignOut');
         window.location = "./login.html"
-        localStorage.removeItem("userEmail")
     }
 
     // sign out function on click button
@@ -70,7 +68,6 @@ onAuthStateChanged(auth, (user) => {
         try {
             await signOut(auth)
             console.log("SignOut Successfully!")
-            localStorage.removeItem("userEmail")
             window.location = "./login.html"
         } catch (error) {
             console.log('error => ', error);
@@ -78,16 +75,10 @@ onAuthStateChanged(auth, (user) => {
     })
 });
 
-// getting user email
-
-const userId = localStorage.getItem("userEmail")
-console.log("🚀 ~ userId:", userId)
 
 // create document reference
-if (userId == null ) {
-    alert("hello")
-}
-const myCollectionRef = collection(db, `${userId}-products`)
+
+const myCollectionRef = collection(db, `products`)
 
 // add event listnere on product add form 
 addProductForm.addEventListener("submit", async (event) => {
@@ -125,6 +116,7 @@ addProductForm.addEventListener("submit", async (event) => {
         createdAt: serverTimestamp(),
         productImg: imgUrl,
     }
+    
     addProductForm.reset()
     event.target.children[6].innerHTML = "Add"
     // add try catch function
