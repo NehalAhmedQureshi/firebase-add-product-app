@@ -271,8 +271,8 @@ body {
     }
 
     .price {
-        font-size: 30px;
-        font-size: 600;
+        font-size: 20px;
+        font-size: 500;
     }
 
     .duration {
@@ -285,12 +285,15 @@ body {
     }
 
     .buyNow {
-        font-size: 30px;
+        font-size: 22px;
     }
 
     .img {
-        height: 25vh;
+        height: 22vh;
     }
+}
+input {
+    text-transform: capitalize;
 }
 
 .card .duration {

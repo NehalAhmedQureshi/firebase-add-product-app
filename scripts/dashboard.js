@@ -88,12 +88,12 @@ addProductForm.addEventListener("submit", async (event) => {
     // stop page refreshing on adding event listnere
     event.preventDefault()
 
-    console.log(event.target.children[6].disabled);
-    
-    event.target.children[6].disabled = true
+    const gif = document.createElement("img")
+    gif.setAttribute("src" , "https://cdn.pixabay.com/animation/2024/04/02/07/57/07-57-40-974_512.gif")
+    gif.setAttribute("width" , "35px")
 
-    console.log(event.target.children[6].disabled);
-
+    event.target.children[6].innerHTML = ""
+    event.target.children[6].appendChild(gif)
 
     // send img to storage box
     const myFile = imgInput.files[0];
@@ -119,7 +119,7 @@ addProductForm.addEventListener("submit", async (event) => {
         productImg: imgUrl,
     }
     addProductForm.reset()
-    event.target.children[6].disabled = false
+    event.target.children[6].innerHTML = "Add"
     // add try catch function
     try {
         const result = await addDoc(myCollectionRef, product);
@@ -187,7 +187,7 @@ querySnapshot.forEach((doc) => {
 
     nameDiv.innerHTML = prName
     descDiv.innerHTML = description
-    priceDiv.innerHTML = price
+    priceDiv.innerHTML = `Rs ${price}`
     BuyDiv.innerHTML = "Buy Now"
     duration.innerHTML = date1
 });
@@ -244,7 +244,7 @@ onSnapshot(myCollectionRef, (doc) => {
 
         nameDiv.innerHTML = product.productName
         descDiv.innerHTML = product.productDescription
-        priceDiv.innerHTML = product.productPrice
+        priceDiv.innerHTML = `Rs ${product.productPrice}`
         BuyDiv.innerHTML = "Buy Now"
         duration.innerHTML = date1
 
