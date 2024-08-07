@@ -90,7 +90,7 @@ addProductForm.addEventListener("submit", async (event) => {
 
     const gif = document.createElement("img")
     gif.setAttribute("src" , "https://cdn.pixabay.com/animation/2024/04/02/07/57/07-57-40-974_512.gif")
-    gif.setAttribute("width" , "35px")
+    gif.setAttribute("width" , "45px")
 
     event.target.children[6].innerHTML = ""
     event.target.children[6].appendChild(gif)
