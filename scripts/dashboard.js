@@ -46,19 +46,200 @@ const auth = getAuth();
 console.log(auth);
 
 // check is user is log in or not
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth,async (user) => {
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const userEmail = user.email;
         // console.log("🚀 ~ onAuthStateChanged ~ uid:", userEmail)
         emailDiv.innerHTML = userEmail
-        localStorage.setItem("email" , userEmail)
+        // localStorage.setItem("email" , userEmail)
         // ...
+
+
+        // get user email
+        // const userUID = localStorage.getItem("email")
+        // console.log("🚀 ~ useremail:", userUID)
+
+        const userUID = userEmail
+        console.log("🚀 ~ onAuthStateChanged ~ userUID:", userUID)
+
+        const myCollectionRef = collection(db, `${userUID}products`)
+
+        // add event listnere on product add form 
+        addProductForm.addEventListener("submit", async (event) => {
+
+            // stop page refreshing on adding event listnere
+            event.preventDefault()
+
+            const gif = document.createElement("img")
+            gif.setAttribute("src", "https://cdn.pixabay.com/animation/2024/04/02/07/57/07-57-40-974_512.gif")
+            gif.setAttribute("width", "45px")
+
+            event.target.children[6].innerHTML = ""
+            event.target.children[6].appendChild(gif)
+
+            // send img to storage box
+            const myFile = imgInput.files[0];
+            // storage referance 
+            const storageRef = ref(storage, `${userUID}/${myFile.name}`);
+            // we are uploading the file here to the storage bucket
+            const imgSnapShot = await uploadBytes(storageRef, myFile);
+            // get the download url of the file
+            const imgUrl = await getDownloadURL(storageRef);
+            // getting input by event target
+            const productName = event.target.children[1]
+            const productType = event.target.children[2]
+            const productImg = event.target.children[3]
+            const productDescription = event.target.children[4]
+            const productPrice = event.target.children[5]
+            const product = {
+                productName: productName.value,
+                productType: productType.value,
+                productDescription: productDescription.value,
+                productPrice: Number(productPrice.value),
+                createdAt: serverTimestamp(),
+                productImg: imgUrl,
+            }
+
+            addProductForm.reset()
+            event.target.children[6].innerHTML = "Add"
+            // add try catch function
+            try {
+                const result = await addDoc(myCollectionRef, product);
+                console.log("result => ", result);
+            } catch (error) {
+                console.log("error on document adding => ", error);
+
+            }
+        })
+
+        //  get documents from firestore 
+        const querySnapshot = await getDocs(myCollectionRef)
+
+        querySnapshot.forEach((doc) => {
+            const product = doc.data();
+            // wrap = ""
+            const prName = product.productName;
+            const type = product.productType;
+            const description = product.productDescription;
+            const createTime = product.createdAt;
+            const price = product.productPrice;
+            const img = product.productImg;
+            console.log("🚀 ~ querySnapshot.forEach ~ img:", img)
+
+            // date converted to "1 day ago | 20 min ago" (optional)
+            const date1 = product.createdAt
+                ? dateFns.formatDistance(product.createdAt?.toDate(), new Date(), {
+                    addSuffix: true, // true means ago add karna hy
+                })
+                : "";
+
+            // make card
+            const card = document.createElement("div")
+            card.setAttribute("class", "card")
+
+            const duration = document.createElement("div")
+            duration.setAttribute("class", "duration")
+
+            const imgDiv = document.createElement("div")
+            imgDiv.setAttribute("class", "img")
+            const imgDivInner = document.createElement("img")
+            imgDivInner.setAttribute("alt", "no image")
+            imgDivInner.setAttribute("src", img)
+            imgDiv.appendChild(imgDivInner)
+
+            const nameDiv = document.createElement("div")
+            nameDiv.setAttribute("class", "name")
+
+            const descDiv = document.createElement("div")
+            descDiv.setAttribute("class", "description")
+
+            const priceDiv = document.createElement("div")
+            priceDiv.setAttribute("class", "price")
+
+            const BuyDiv = document.createElement("div")
+            BuyDiv.setAttribute("class", "buyNow")
+
+            wrap.appendChild(card)
+            card.appendChild(duration)
+            card.appendChild(imgDiv)
+            card.appendChild(nameDiv)
+            card.appendChild(descDiv)
+            card.appendChild(priceDiv)
+            card.appendChild(BuyDiv)
+
+            nameDiv.innerHTML = prName
+            descDiv.innerHTML = description
+            priceDiv.innerHTML = `Rs ${price}`
+            BuyDiv.innerHTML = "Buy Now"
+            duration.innerHTML = date1
+        });
+
+        // working 2
+
+        onSnapshot(myCollectionRef, (doc) => {
+            wrap.innerHTML = "";
+
+            doc.docs.forEach((eachDoc, index) => {
+                console.log("🚀 ~ doc.docs.forEach ~ index:", index)
+                const product = eachDoc.data();
+
+                //   set date order 
+                const date1 = product.createdAt
+                    ? dateFns.formatDistance(product.createdAt?.toDate(), new Date(), {
+                        addSuffix: true, // true means ago add karna hy
+                    })
+                    : "";
+
+                // make card
+                const card = document.createElement("div")
+                card.setAttribute("class", "card")
+
+                const duration = document.createElement("div")
+                duration.setAttribute("class", "duration")
+
+                const imgDiv = document.createElement("div")
+                imgDiv.setAttribute("class", "img")
+                const imgDivInner = document.createElement("img")
+                imgDivInner.setAttribute("alt", "no image")
+                imgDivInner.setAttribute("src", product.productImg)
+                imgDiv.appendChild(imgDivInner)
+
+                const nameDiv = document.createElement("div")
+                nameDiv.setAttribute("class", "name")
+
+                const descDiv = document.createElement("div")
+                descDiv.setAttribute("class", "description")
+
+                const priceDiv = document.createElement("div")
+                priceDiv.setAttribute("class", "price")
+
+                const BuyDiv = document.createElement("div")
+                BuyDiv.setAttribute("class", "buyNow")
+
+                wrap.appendChild(card)
+                card.appendChild(duration)
+                card.appendChild(imgDiv)
+                card.appendChild(nameDiv)
+                card.appendChild(descDiv)
+                card.appendChild(priceDiv)
+                card.appendChild(BuyDiv)
+
+                nameDiv.innerHTML = product.productName
+                descDiv.innerHTML = product.productDescription
+                priceDiv.innerHTML = `Rs ${product.productPrice}`
+                BuyDiv.innerHTML = "Buy Now"
+                duration.innerHTML = date1
+
+            });
+        });
+
     } else {
         // User is signed out
         // ...
         console.log('SignOut');
+        // localStorage.removeItem("email")
         window.location = "./login.html"
     }
 
@@ -74,179 +255,3 @@ onAuthStateChanged(auth, (user) => {
         }
     })
 });
-
-
-// create document reference
-
-const myCollectionRef = collection(db, `products`)
-
-// add event listnere on product add form 
-addProductForm.addEventListener("submit", async (event) => {
-
-    // stop page refreshing on adding event listnere
-    event.preventDefault()
-
-    const gif = document.createElement("img")
-    gif.setAttribute("src" , "https://cdn.pixabay.com/animation/2024/04/02/07/57/07-57-40-974_512.gif")
-    gif.setAttribute("width" , "45px")
-
-    event.target.children[6].innerHTML = ""
-    event.target.children[6].appendChild(gif)
-
-    // send img to storage box
-    const myFile = imgInput.files[0];
-    // storage referance 
-    const storageRef = ref(storage, myFile.name);
-    // we are uploading the file here to the storage bucket
-    const imgSnapShot = await uploadBytes(storageRef, myFile);
-    // get the download url of the file
-    const imgUrl = await getDownloadURL(storageRef);
-
-    // getting input by event target
-    const productName = event.target.children[1]
-    const productType = event.target.children[2]
-    const productImg = event.target.children[3]
-    const productDescription = event.target.children[4]
-    const productPrice = event.target.children[5]
-    const product = {
-        productName: productName.value,
-        productType: productType.value,
-        productDescription: productDescription.value,
-        productPrice: Number(productPrice.value),
-        createdAt: serverTimestamp(),
-        productImg: imgUrl,
-    }
-    
-    addProductForm.reset()
-    event.target.children[6].innerHTML = "Add"
-    // add try catch function
-    try {
-        const result = await addDoc(myCollectionRef, product);
-        console.log("result => ", result);
-    } catch (error) {
-        console.log("error on document adding => ", error);
-
-    }
-})
-
-//  get documents from firestore 
-const querySnapshot = await getDocs(myCollectionRef)
-
-querySnapshot.forEach((doc) => {
-    const product = doc.data();
-    // wrap = ""
-    const prName = product.productName;
-    const type = product.productType;
-    const description = product.productDescription;
-    const createTime = product.createdAt;
-    const price = product.productPrice;
-    const img = product.productImg;
-    console.log("🚀 ~ querySnapshot.forEach ~ img:", img)
-
-    // date converted to "1 day ago | 20 min ago" (optional)
-    const date1 = product.createdAt
-        ? dateFns.formatDistance(product.createdAt?.toDate(), new Date(), {
-            addSuffix: true, // true means ago add karna hy
-        })
-        : "";
-
-    // make card
-    const card = document.createElement("div")
-    card.setAttribute("class", "card")
-
-    const duration = document.createElement("div")
-    duration.setAttribute("class", "duration")
-
-    const imgDiv = document.createElement("div")
-    imgDiv.setAttribute("class", "img")
-    const imgDivInner = document.createElement("img")
-    imgDivInner.setAttribute("alt", "no image")
-    imgDivInner.setAttribute("src" , img)
-    imgDiv.appendChild(imgDivInner)
-
-    const nameDiv = document.createElement("div")
-    nameDiv.setAttribute("class", "name")
-
-    const descDiv = document.createElement("div")
-    descDiv.setAttribute("class", "description")
-
-    const priceDiv = document.createElement("div")
-    priceDiv.setAttribute("class", "price")
-
-    const BuyDiv = document.createElement("div")
-    BuyDiv.setAttribute("class", "buyNow")
-
-    wrap.appendChild(card)
-    card.appendChild(duration)
-    card.appendChild(imgDiv)
-    card.appendChild(nameDiv)
-    card.appendChild(descDiv)
-    card.appendChild(priceDiv)
-    card.appendChild(BuyDiv)
-
-    nameDiv.innerHTML = prName
-    descDiv.innerHTML = description
-    priceDiv.innerHTML = `Rs ${price}`
-    BuyDiv.innerHTML = "Buy Now"
-    duration.innerHTML = date1
-});
-
-// working 2
-
-onSnapshot(myCollectionRef, (doc) => {
-    wrap.innerHTML = "";
-
-    doc.docs.forEach((eachDoc, index) => {
-        console.log("🚀 ~ doc.docs.forEach ~ index:", index)
-        const product = eachDoc.data();
-
-        //   set date order 
-        const date1 = product.createdAt
-            ? dateFns.formatDistance(product.createdAt?.toDate(), new Date(), {
-                addSuffix: true, // true means ago add karna hy
-            })
-            : "";
-
-        // make card
-        const card = document.createElement("div")
-        card.setAttribute("class", "card")
-
-        const duration = document.createElement("div")
-        duration.setAttribute("class", "duration")
-
-        const imgDiv = document.createElement("div")
-        imgDiv.setAttribute("class", "img")
-        const imgDivInner = document.createElement("img")
-        imgDivInner.setAttribute("alt", "no image")
-        imgDivInner.setAttribute("src", product.productImg)
-        imgDiv.appendChild(imgDivInner)
-
-        const nameDiv = document.createElement("div")
-        nameDiv.setAttribute("class", "name")
-
-        const descDiv = document.createElement("div")
-        descDiv.setAttribute("class", "description")
-
-        const priceDiv = document.createElement("div")
-        priceDiv.setAttribute("class", "price")
-
-        const BuyDiv = document.createElement("div")
-        BuyDiv.setAttribute("class", "buyNow")
-
-        wrap.appendChild(card)
-        card.appendChild(duration)
-        card.appendChild(imgDiv)
-        card.appendChild(nameDiv)
-        card.appendChild(descDiv)
-        card.appendChild(priceDiv)
-        card.appendChild(BuyDiv)
-
-        nameDiv.innerHTML = product.productName
-        descDiv.innerHTML = product.productDescription
-        priceDiv.innerHTML = `Rs ${product.productPrice}`
-        BuyDiv.innerHTML = "Buy Now"
-        duration.innerHTML = date1
-
-    });
-});
-
